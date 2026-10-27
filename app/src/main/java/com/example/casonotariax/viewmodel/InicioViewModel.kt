@@ -3,6 +3,7 @@ package com.example.casonotariax.viewmodel
 import androidx.lifecycle.ViewModel
 import com.example.casonotariax.model.AccesoRapido
 import com.example.casonotariax.model.Metrica
+import com.example.casonotariax.model.TramiteItem
 import com.example.casonotariax.repository.NotariaRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.update
 data class InicioUiState(
     val metricas: List<Metrica> = emptyList(),
     val accesosRapidos: List<AccesoRapido> = emptyList(),
+    val catalogoTramites: List<TramiteItem> = emptyList(),
     val llamadaSolicitada: Boolean = false,
     val mensajeLlamada: String = "Te llamamos sin costo",
     val pestañaSeleccionada: Int = 0
@@ -32,7 +34,8 @@ class InicioViewModel(
         _uiState.update {
             it.copy(
                 metricas = repository.obtenerMetricas(),
-                accesosRapidos = repository.obtenerAccesosRapidos()
+                accesosRapidos = repository.obtenerAccesosRapidos(),
+                catalogoTramites = repository.obtenerCatalogoTramites()
             )
         }
     }

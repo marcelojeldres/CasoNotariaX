@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.casonotariax.model.AccesoRapido
+import com.example.casonotariax.ui.theme.PantallaTramites
 import com.example.casonotariax.viewmodel.InicioViewModel
 
 val DarkNavy = Color(0xFF0F2843)
@@ -68,266 +69,309 @@ fun PantallaInicio(
             }
         }
     ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(innerPadding)
-                .verticalScroll(rememberScrollState())
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            // Header: Logo y Chip Seguro
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    Surface(
-                        shape = RoundedCornerShape(8.dp),
-                        color = DarkNavy,
-                        modifier = Modifier.size(36.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Description,
-                            contentDescription = "Logo",
-                            tint = Color.White,
-                            modifier = Modifier.padding(6.dp)
-                        )
-                    }
-                    Text(
-                        text = "NotariApp",
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = DarkNavy
-                    )
-                }
-
-                Surface(
-                    shape = RoundedCornerShape(20.dp),
-                    color = Color(0xFFE8F5E9)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp)
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.CheckCircle,
-                            contentDescription = null,
-                            tint = Color(0xFF2E7D32),
-                            modifier = Modifier.size(14.dp)
-                        )
-                        Text(
-                            text = "Seguro",
-                            color = Color(0xFF2E7D32),
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
-            }
-
-            // Banner Principal
-            Card(
-                shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = DarkNavy),
-                modifier = Modifier.fillMaxWidth()
-            ) {
+        when (uiState.pestañaSeleccionada) {
+            0 -> {
                 Column(
-                    modifier = Modifier.padding(20.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .verticalScroll(rememberScrollState())
+                        .padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Surface(
-                        color = Color.White.copy(alpha = 0.15f),
-                        shape = RoundedCornerShape(12.dp)
+                    // Header: Logo y Chip Seguro
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
                     ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        ) {
+                            Surface(
+                                shape = RoundedCornerShape(8.dp),
+                                color = DarkNavy,
+                                modifier = Modifier.size(36.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Description,
+                                    contentDescription = "Logo",
+                                    tint = Color.White,
+                                    modifier = Modifier.padding(6.dp)
+                                )
+                            }
+                            Text(
+                                text = "NotariApp",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = DarkNavy
+                            )
+                        }
+
+                        Surface(
+                            shape = RoundedCornerShape(20.dp),
+                            color = Color(0xFFE8F5E9)
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.CheckCircle,
+                                    contentDescription = null,
+                                    tint = Color(0xFF2E7D32),
+                                    modifier = Modifier.size(14.dp)
+                                )
+                                Text(
+                                    text = "Seguro",
+                                    color = Color(0xFF2E7D32),
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
+                    }
+
+                    // Banner Principal
+                    Card(
+                        shape = RoundedCornerShape(20.dp),
+                        colors = CardDefaults.cardColors(containerColor = DarkNavy),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier.padding(20.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)
+                        ) {
+                            Surface(
+                                color = Color.White.copy(alpha = 0.15f),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(
+                                    text = "NOTARÍA DIGITAL",
+                                    color = Color.White,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                                )
+                            }
+                            Text(
+                                text = "Tu notaría,\nmás cerca de ti.",
+                                color = Color.White,
+                                fontSize = 26.sp,
+                                fontWeight = FontWeight.Bold,
+                                lineHeight = 32.sp
+                            )
+                            Text(
+                                text = "Trámites simples, seguros y con seguimiento desde tu celular.",
+                                color = Color.White.copy(alpha = 0.8f),
+                                fontSize = 13.sp
+                            )
+                            Button(
+                                onClick = { viewModel.seleccionarPestaña(1) },
+                                colors = ButtonDefaults.buttonColors(containerColor = Color.White),
+                                shape = RoundedCornerShape(12.dp)
+                            ) {
+                                Text(
+                                    text = "Ver trámites y precios",
+                                    color = DarkNavy,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                                Spacer(modifier = Modifier.width(6.dp))
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowForward,
+                                    contentDescription = null,
+                                    tint = DarkNavy,
+                                    modifier = Modifier.size(16.dp)
+                                )
+                            }
+                        }
+                    }
+
+                    // Métricas
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color.White),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 16.dp),
+                            horizontalArrangement = Arrangement.SpaceEvenly
+                        ) {
+                            uiState.metricas.forEachIndexed { index, metrica ->
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(text = metrica.valor, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = DarkNavy)
+                                    Text(text = metrica.etiqueta, fontSize = 11.sp, color = TextMuted)
+                                }
+                                if (index < uiState.metricas.lastIndex) {
+                                    VerticalDivider(modifier = Modifier.height(30.dp), color = CardBorder)
+                                }
+                            }
+                        }
+                    }
+
+                    // Accesos Rápidos
+                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Text(
-                            text = "NOTARÍA DIGITAL",
-                            color = Color.White,
+                            text = "ACCESOS RÁPIDOS",
                             fontSize = 11.sp,
                             fontWeight = FontWeight.Bold,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                            color = TextMuted
                         )
-                    }
-                    Text(
-                        text = "Tu notaría,\nmás cerca de ti.",
-                        color = Color.White,
-                        fontSize = 26.sp,
-                        fontWeight = FontWeight.Bold,
-                        lineHeight = 32.sp
-                    )
-                    Text(
-                        text = "Trámites simples, seguros y con seguimiento desde tu celular.",
-                        color = Color.White.copy(alpha = 0.8f),
-                        fontSize = 13.sp
-                    )
-                    Button(
-                        onClick = { },
-                        colors = ButtonDefaults.buttonColors(containerColor = Color.White),
-                        shape = RoundedCornerShape(12.dp)
-                    ) {
                         Text(
-                            text = "Ver trámites y precios",
-                            color = DarkNavy,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Spacer(modifier = Modifier.width(6.dp))
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                            contentDescription = null,
-                            tint = DarkNavy,
-                            modifier = Modifier.size(16.dp)
+                            text = "¿Qué necesitas?",
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = DarkNavy
                         )
                     }
-                }
-            }
 
-            // Métricas
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color.White),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    uiState.metricas.forEachIndexed { index, metrica ->
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = metrica.valor, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = DarkNavy)
-                            Text(text = metrica.etiqueta, fontSize = 11.sp, color = TextMuted)
-                        }
-                        if (index < uiState.metricas.lastIndex) {
-                            VerticalDivider(modifier = Modifier.height(30.dp), color = CardBorder)
+                    // Renderizado seguro usando count()
+                    val items = uiState.accesosRapidos
+                    val totalItems = items.count()
+
+                    for (i in 0 until totalItems step 2) {
+                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                            BotonAccesoRapido(
+                                modifier = Modifier.weight(1f),
+                                item = items[i],
+                                onClick = {
+                                    if (items[i].id == "tramites") {
+                                        viewModel.seleccionarPestaña(1)
+                                    }
+                                }
+                            )
+                            if (i + 1 < totalItems) {
+                                BotonAccesoRapido(
+                                    modifier = Modifier.weight(1f),
+                                    item = items[i + 1],
+                                    onClick = {
+                                        if (items[i + 1].id == "tramites") {
+                                            viewModel.seleccionarPestaña(1)
+                                        }
+                                    }
+                                )
+                            } else {
+                                Spacer(modifier = Modifier.weight(1f))
+                            }
                         }
                     }
-                }
-            }
 
-            // Accesos Rápidos
-            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text(
-                    text = "ACCESOS RÁPIDOS",
-                    fontSize = 11.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = TextMuted
-                )
-                Text(
-                    text = "¿Qué necesitas?",
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = DarkNavy
-                )
-            }
-
-            val items = uiState.accesosRapidos
-            for (i in items.indices step 2) {
-                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    BotonAccesoRapido(modifier = Modifier.weight(1f), item = items[i])
-                    if (i + 1 < items.size) {
-                        BotonAccesoRapido(modifier = Modifier.weight(1f), item = items[i + 1])
-                    } else {
-                        Spacer(modifier = Modifier.weight(1f))
-                    }
-                }
-            }
-
-            // Te llamamos
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = DarkNavy),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier.padding(14.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Row(
-                        modifier = Modifier.weight(1f),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(10.dp)
+                    // Te llamamos
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = DarkNavy),
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        Surface(
-                            shape = RoundedCornerShape(10.dp),
-                            color = Color.White.copy(alpha = 0.15f),
-                            modifier = Modifier.size(38.dp)
+                        Row(
+                            modifier = Modifier.padding(14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Row(
+                                modifier = Modifier.weight(1f),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                            ) {
+                                Surface(
+                                    shape = RoundedCornerShape(10.dp),
+                                    color = Color.White.copy(alpha = 0.15f),
+                                    modifier = Modifier.size(38.dp)
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Call,
+                                        contentDescription = null,
+                                        tint = Color.White,
+                                        modifier = Modifier.padding(8.dp)
+                                    )
+                                }
+                                Column {
+                                    Text(
+                                        text = "¿Necesitas orientación?",
+                                        fontSize = 11.sp,
+                                        color = Color.White.copy(alpha = 0.7f)
+                                    )
+                                    Text(
+                                        text = uiState.mensajeLlamada,
+                                        fontSize = 13.sp,
+                                        fontWeight = FontWeight.Bold,
+                                        color = Color.White
+                                    )
+                                }
+                            }
+
+                            Button(
+                                onClick = { viewModel.onSolicitarLlamadaClick() },
+                                enabled = !uiState.llamadaSolicitada,
+                                shape = RoundedCornerShape(10.dp),
+                                colors = ButtonDefaults.buttonColors(
+                                    containerColor = Color.White.copy(alpha = 0.2f),
+                                    disabledContainerColor = Color.White.copy(alpha = 0.08f)
+                                )
+                            ) {
+                                Text(
+                                    text = if (uiState.llamadaSolicitada) "Enviado" else "Solicitar llamada",
+                                    fontSize = 11.sp,
+                                    color = Color.White
+                                )
+                            }
+                        }
+                    }
+
+                    // Aviso Seguridad
+                    Card(
+                        shape = RoundedCornerShape(16.dp),
+                        colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
+                        modifier = Modifier.fillMaxWidth()
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(14.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(10.dp)
                         ) {
                             Icon(
-                                imageVector = Icons.Default.Call,
+                                imageVector = Icons.Default.VerifiedUser,
                                 contentDescription = null,
-                                tint = Color.White,
-                                modifier = Modifier.padding(8.dp)
+                                tint = Color(0xFF2E7D32)
                             )
+                            Column {
+                                Text(
+                                    text = "Tu información está protegida",
+                                    fontWeight = FontWeight.Bold,
+                                    fontSize = 13.sp,
+                                    color = Color(0xFF1B5E20)
+                                )
+                                Text(
+                                    text = "Usamos cifrado y validación de identidad para cuidar tus datos.",
+                                    fontSize = 11.sp,
+                                    color = Color(0xFF2E7D32)
+                                )
+                            }
                         }
-                        Column {
-                            Text(
-                                text = "¿Necesitas orientación?",
-                                fontSize = 11.sp,
-                                color = Color.White.copy(alpha = 0.7f)
-                            )
-                            Text(
-                                text = uiState.mensajeLlamada,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = Color.White
-                            )
-                        }
-                    }
-
-                    Button(
-                        onClick = { viewModel.onSolicitarLlamadaClick() },
-                        enabled = !uiState.llamadaSolicitada,
-                        shape = RoundedCornerShape(10.dp),
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.White.copy(alpha = 0.2f),
-                            disabledContainerColor = Color.White.copy(alpha = 0.08f)
-                        )
-                    ) {
-                        Text(
-                            text = if (uiState.llamadaSolicitada) "Enviado" else "Solicitar llamada",
-                            fontSize = 11.sp,
-                            color = Color.White
-                        )
                     }
                 }
             }
-
-            // Aviso Seguridad
-            Card(
-                shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFE8F5E9)),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Row(
-                    modifier = Modifier.padding(14.dp),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(10.dp)
+            1 -> {
+                PantallaTramites(
+                    tramites = uiState.catalogoTramites,
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+            else -> {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.VerifiedUser,
-                        contentDescription = null,
-                        tint = Color(0xFF2E7D32)
+                    Text(
+                        text = "Sección en desarrollo",
+                        color = TextMuted,
+                        fontSize = 16.sp
                     )
-                    Column {
-                        Text(
-                            text = "Tu información está protegida",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 13.sp,
-                            color = Color(0xFF1B5E20)
-                        )
-                        Text(
-                            text = "Usamos cifrado y validación de identidad para cuidar tus datos.",
-                            fontSize = 11.sp,
-                            color = Color(0xFF2E7D32)
-                        )
-                    }
                 }
             }
         }

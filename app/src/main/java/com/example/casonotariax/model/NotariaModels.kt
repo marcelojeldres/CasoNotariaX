@@ -13,3 +13,12 @@ data class AccesoRapido(
     val subtitulo: String,
     val icono: ImageVector
 )
+
+data class TramiteItem(
+    val id: String,
+    val titulo: String,
+    val descripcion: String,
+    val precio: String,
+    val tiempoEntrega: String,
+    val icono: ImageVector
+)
