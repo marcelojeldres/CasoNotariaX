@@ -1,6 +1,7 @@
 package com.example.casonotariax.ui.theme
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,12 +23,13 @@ import com.example.casonotariax.model.TramiteItem
 
 private val DarkNavy = Color(0xFF0F2843)
 private val TextMuted = Color(0xFF6B7280)
-private val SoftBlueBg = Color(0xFFE8EEF5)
+val SoftBlueBg = Color(0xFFE8EEF5)
 private val CardBorder = Color(0xFFE2E8F0)
 
 @Composable
 fun PantallaTramites(
     tramites: List<TramiteItem>,
+    onTramiteClick: (TramiteItem) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -100,6 +102,7 @@ fun PantallaTramites(
                 shape = RoundedCornerShape(16.dp),
                 colors = CardDefaults.cardColors(containerColor = Color.White),
                 modifier = Modifier.fillMaxWidth()
+                .clickable { onTramiteClick(tramite) }
             ) {
                 Column(
                     modifier = Modifier.padding(16.dp),
@@ -166,7 +169,7 @@ fun PantallaTramites(
                             Text(text = tramite.tiempoEntrega, fontSize = 11.sp, color = TextMuted)
                         }
                         IconButton(
-                            onClick = { },
+                            onClick = { onTramiteClick(tramite)},
                             modifier = Modifier
                                 .size(36.dp)
                                 .clip(RoundedCornerShape(8.dp))

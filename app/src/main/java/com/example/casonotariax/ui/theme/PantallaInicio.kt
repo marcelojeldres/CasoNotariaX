@@ -20,6 +20,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.casonotariax.model.AccesoRapido
+import com.example.casonotariax.ui.theme.PantallaDetalleTramite
+import com.example.casonotariax.ui.theme.PantallaNosotros
+import com.example.casonotariax.ui.theme.PantallaPerfil
 import com.example.casonotariax.ui.theme.PantallaTramites
 import com.example.casonotariax.viewmodel.InicioViewModel
 
@@ -354,9 +357,36 @@ fun PantallaInicio(
                     }
                 }
             }
-            1 -> {
+            1 -> if (uiState.mostrarDetalleTramite && uiState.tramiteSeleccionado != null) {
+                PantallaDetalleTramite(
+                    tramite = uiState.tramiteSeleccionado!!,
+                    onVolverClick = { viewModel.volverAListaTramites() },
+                    onSolicitarClick = {
+                        viewModel.solicitarDocumentoActual()
+                    },
+                    modifier = Modifier.padding(innerPadding)
+                )
+            } else{
                 PantallaTramites(
                     tramites = uiState.catalogoTramites,
+                    onTramiteClick = {tramite -> viewModel.seleccionarTramiteParaDetalle(tramite)},
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+            2 -> {
+                PantallaNosotros(
+                    caracteristicas = uiState.caracteristicasNosotros,
+                    sedes = uiState.sedes,
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
+            4 -> {
+                PantallaPerfil(
+                    uiState = uiState,
+                    onLoginClick = { correo, pass -> viewModel.iniciarSesion(correo, pass) },
+                    onRegistroClick = { correo, pass, nombre -> viewModel.registrarUsuario(correo, pass, nombre) },                    onCambiarModo = { esRegistro -> viewModel.cambiarModoRegistro(esRegistro) },
+                    onCerrarSesion = { viewModel.cerrarSesion() },
+                    onIrATramites = { viewModel.seleccionarPestaña(1) },
                     modifier = Modifier.padding(innerPadding)
                 )
             }
