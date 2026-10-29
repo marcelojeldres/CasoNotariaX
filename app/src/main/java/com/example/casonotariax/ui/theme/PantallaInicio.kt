@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.casonotariax.model.AccesoRapido
+import com.example.casonotariax.ui.screens.PantallaContacto
 import com.example.casonotariax.ui.theme.PantallaDetalleTramite
 import com.example.casonotariax.ui.theme.PantallaNosotros
 import com.example.casonotariax.ui.theme.PantallaPerfil
@@ -216,52 +217,6 @@ fun PantallaInicio(
                         }
                     }
 
-                    // Accesos Rápidos
-                    Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                        Text(
-                            text = "ACCESOS RÁPIDOS",
-                            fontSize = 11.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = TextMuted
-                        )
-                        Text(
-                            text = "¿Qué necesitas?",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = DarkNavy
-                        )
-                    }
-
-                    // Renderizado seguro usando count()
-                    val items = uiState.accesosRapidos
-                    val totalItems = items.count()
-
-                    for (i in 0 until totalItems step 2) {
-                        Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                            BotonAccesoRapido(
-                                modifier = Modifier.weight(1f),
-                                item = items[i],
-                                onClick = {
-                                    if (items[i].id == "tramites") {
-                                        viewModel.seleccionarPestaña(1)
-                                    }
-                                }
-                            )
-                            if (i + 1 < totalItems) {
-                                BotonAccesoRapido(
-                                    modifier = Modifier.weight(1f),
-                                    item = items[i + 1],
-                                    onClick = {
-                                        if (items[i + 1].id == "tramites") {
-                                            viewModel.seleccionarPestaña(1)
-                                        }
-                                    }
-                                )
-                            } else {
-                                Spacer(modifier = Modifier.weight(1f))
-                            }
-                        }
-                    }
 
                     // Te llamamos
                     Card(
@@ -378,6 +333,12 @@ fun PantallaInicio(
                     caracteristicas = uiState.caracteristicasNosotros,
                     sedes = uiState.sedes,
                     modifier = Modifier.padding(innerPadding)
+                )
+            }
+            3-> {
+                PantallaContacto(
+                    modifier = Modifier.padding(innerPadding)
+
                 )
             }
             4 -> {

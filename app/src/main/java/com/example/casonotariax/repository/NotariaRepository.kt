@@ -95,24 +95,24 @@ class NotariaRepository {
     fun obtenerSedes(): List<SedeItem>{
         return listOf(
             SedeItem(
-                id = "san_isidro",
+                id = "AIEP",
                 tipoEtiqueta = "SEDE PRINCIPAL",
-                nombre = "Sede San Isidro",
-                direccion = "Av. Javier Prado Oeste 420",
+                nombre = "Sede Aiep",
+                direccion = "Av. vicuña Mackenna 4685",
                 horario = "Lun-Vie - 8:30 a 18:00"
             ),
             SedeItem(
                 id = "miraflores",
                 tipoEtiqueta = "HORARIO EXTENDIDO",
-                nombre = "Sede Miraflores",
-                direccion = "Av. José Larco 812",
+                nombre = "Sede Universidad Catolica",
+                direccion = "Av. vicuña Mackenna 4917 ",
                 horario = "Lun-Sáb - 9:00 a 17:00"
             ),
             SedeItem(
                 id = "la_molina",
                 tipoEtiqueta = "ESTACIONAMIENTO",
-                nombre = "Sede La Molina",
-                direccion = "Av. Raúl Ferrero 1280",
+                nombre = "Sede Duoc Uc",
+                direccion = "Av. Libertador Bernardo O´Higgins 340",
                 horario = "Lun-Vie - 9:00 a 17:30"
             )
         )

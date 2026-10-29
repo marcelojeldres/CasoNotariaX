@@ -1,23 +1,18 @@
 package com.example.casonotariax.ui.theme
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.ChevronRight
@@ -28,14 +23,24 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.casonotariax.model.CaracteristicaNosotros
 import com.example.casonotariax.model.SedeItem
 import com.example.casonotariax.ui.DarkNavy
 import com.example.casonotariax.ui.SoftBlueBg
 import com.example.casonotariax.ui.TextMuted
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.maps.android.compose.GoogleMap
+import com.google.maps.android.compose.Marker
+import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.rememberCameraPositionState
 
 @Composable
 fun PantallaNosotros(
@@ -79,7 +84,6 @@ fun PantallaNosotros(
                 .fillMaxWidth()
                 .height(210.dp)
         ) {
-            // Imagen de oficina / fondo simulado
             Card(
                 shape = RoundedCornerShape(20.dp),
                 modifier = Modifier.fillMaxSize()
@@ -113,7 +117,6 @@ fun PantallaNosotros(
                 }
             }
 
-            // Tarjeta superpuesta de experiencia (esquina inferior derecha)
             Surface(
                 shape = RoundedCornerShape(16.dp),
                 color = DarkNavy,
@@ -136,7 +139,7 @@ fun PantallaNosotros(
             }
         }
 
-        // Quiénes somos: Títulos y descripción
+        // Quiénes somos
         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             Text(text = "QUIÉNES SOMOS", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = TextMuted)
             Text(
@@ -153,7 +156,7 @@ fun PantallaNosotros(
             )
         }
 
-        // Fila de Características (Seguridad jurídica / Acompañamiento real)
+        // Características
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
@@ -187,7 +190,7 @@ fun PantallaNosotros(
             }
         }
 
-        // Sección de Ubicaciones / Mapa
+        // Ubicaciones / Mapa
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -198,20 +201,41 @@ fun PantallaNosotros(
                     Text(text = "NUESTRAS UBICACIONES", fontSize = 11.sp, fontWeight = FontWeight.Bold, color = TextMuted)
                     Text(text = "Visítanos", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = DarkNavy)
                 }
-                Text(text = "3 sedes en Lima", fontSize = 11.sp, color = TextMuted)
+                Text(text = "${sedes.size} sedes disponibles", fontSize = 11.sp, color = TextMuted)
             }
 
-            // Tarjeta del Mapa simulado
+            // Contenedor del Mapa
             Card(
                 shape = RoundedCornerShape(16.dp),
-                colors = CardDefaults.cardColors(containerColor = SoftBlueBg),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
+                    .height(280.dp)
             ) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    // Aquí puedes renderizar un mapa real con Google Maps Compose si deseas más adelante
-                    Icon(imageVector = Icons.Default.Place, contentDescription = null, tint = DarkNavy, modifier = Modifier.size(48.dp))
+                val miUbicacion = LatLng(-33.499365, -70.616540)
+                val lugar1 = LatLng(-33.497672, -70.612602)
+                val lugar2 = LatLng(-33.501046, -70.617071)
+                val lugar3 = LatLng(-33.497745, -70.617830)
+
+                val cameraPositionState = rememberCameraPositionState {
+                    position = CameraPosition.fromLatLngZoom(miUbicacion, 15f)
+                }
+
+                GoogleMap(
+                    modifier = Modifier.fillMaxSize(),
+                    cameraPositionState = cameraPositionState
+                ) {
+                    Marker(
+                        state = MarkerState(position = lugar1),
+                        title = "Sede Norte"
+                    )
+                    Marker(
+                        state = MarkerState(position = lugar2),
+                        title = "Sede Central"
+                    )
+                    Marker(
+                        state = MarkerState(position = lugar3),
+                        title = "Sede Sur"
+                    )
                 }
             }
         }
